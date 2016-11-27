@@ -102,7 +102,7 @@ vector<vector<int>> initializeTable(int count){
 void printTable(vector<vector<int>> table){
     for(int i = 0; i < table.size(); i++){
         for(int j = 0; j < table.size(); j++){
-            cout<<table[i][j]<<"\t\t";
+            cout<<table[i][j]<<"\t\t\t\t";
         }
 
         cout<<endl<<endl;
@@ -135,7 +135,7 @@ int pieceOne(int i, int k, vector<vector<int>> table){
     if(i == k)
         return 0;
     else
-        return table[i][k];
+        return table[i-1][k-1];
 }
 
 
@@ -147,7 +147,7 @@ int pieceTwo(int k, int j, vector<vector<int>> table){
     if(k == j)
         return 0;
     else
-        return table[k][j];
+        return table[k-1][j-1];
 }
 
 
@@ -161,31 +161,66 @@ int pieceThree(int i, int k, int j,vector<int> pList){
 int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y, int priority) {
     vector<int> minimumList;
 
-
-    if(priority == 1) {
+    //get the value
+    for(int z = 0; z < priority; z++){
         int i = x+1;
-        int k = i;
+        int k = i+z;
         int j = y+1;
 
-        cout << pieceOne(i, k, table) + pieceTwo(k, j, table) + pieceThree(i, k, j, pList)<<endl;
+        minimumList.push_back(pieceOne(i, k, table) + pieceTwo(k, j, table) + pieceThree(i, k, j, pList));
     }
 
+    //find the min value
+    int min = minimumList[0];
+    for(int i = 0; i < minimumList.size(); i++){
+        if(min > minimumList[i])
+            min = minimumList[i];
+    }
 
-    return 0;
+    return min;
 }
 
 
 vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
     //solve each matrix work combinations for the minimum
-    for(int i = 0; i < matrixWorkCombos.size(); i++){
+    int maxPriority = matrixWorkCombos[0].priority_;
 
-        int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+    //get the max priority or number of times
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        if(maxPriority < matrixWorkCombos[i].priority_){
+            maxPriority = matrixWorkCombos[i].priority_;
+        }
     }
 
-    //build priority lists
+    //execute priority by priority
     for(int i = 0; i < matrixWorkCombos.size(); i++){
-
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 1){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
     }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 2){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 3){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    printTable(table);
 
     return table;
 }
