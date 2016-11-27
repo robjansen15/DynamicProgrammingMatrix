@@ -3,5 +3,5 @@ project(DynamicProgrammingMatrixTable)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp MatrixCombo.cpp MatrixCombo.h Combo.cpp Combo.h)
 add_executable(DynamicProgrammingMatrixTable ${SOURCE_FILES})

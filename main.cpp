@@ -3,45 +3,11 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "MatrixCombo.h"
+#include "Combo.h"
 
 using namespace std;
 
-
-/*Classes Begin*/
-
-class MatrixCombo {
-public:
-    int x_;
-    int y_;
-    MatrixCombo(int x, int y);
-
-private:
-};
-
-MatrixCombo::MatrixCombo(int x, int y) {
-    this->x_ = x;
-    this->y_ = y;
-}
-
-class Combo {
-public:
-    int x_;
-    int y_;
-    int priority_;
-    int value_;
-    Combo(int x, int y);
-
-private:
-};
-
-Combo::Combo(int x, int y) {
-    this->x_ = x;
-    this->y_ = y;
-    this->priority_ = y -x;
-    this->value_ = -1;
-}
-
-/*Classes End*/
 
 //code for splitting a string
 //found at: http://code.runnable.com/VHb0hWMZp-ws1gAr/splitting-a-string-into-a-vector-for-c%2B%2B
@@ -164,36 +130,6 @@ vector<Combo> getMatrixCombinations(vector<vector<int>> table, int count){
 
 /*base algorithm start*/
 
-vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
-    //solve each matrix work combinations for the minimum
-    for(int i = 0; i < matrixWorkCombos.size(); i++){
-        int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
-
-        cout<<min<<endl;
-    }
-
-
-    return table;
-}
-
-
-//solve combo
-int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y, int priority) {
-    vector<int> minimumList;
-
-    if(priority == 1){
-        int i = x-1;
-        int j = y;
-        int k = x;
-        minimumList.push_back(pieceOne(i,k,table) + pieceTwo(k,j,table));
-    }
-
-
-
-    return 0;
-}
-
-
 //solve A[i,k]
 int pieceOne(int i, int k, vector<vector<int>> table){
     if(i == k)
@@ -218,6 +154,35 @@ int pieceTwo(int k, int j, vector<vector<int>> table){
 //solve P_i-1 * P_k * P_j
 int pieceThree(int i, int k, int j, vector<vector<int>> table){
 
+    return 0;
+}
+
+
+//solve combo
+int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y, int priority) {
+    vector<int> minimumList;
+
+    if(priority == 1){
+        int i = x-1;
+        int j = y;
+        int k = x;
+        //minimumList.push_back(pieceOne(i,k,table) + pieceTwo(k,j,table) + pieceThree(i,k,j,table));
+
+        cout<<pieceOne(i,k,table) + pieceTwo(k,j,table) + pieceThree(i,k,j,table)<<endl;
+    }
+
+
+    return 0;
+}
+
+
+vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
+    //solve each matrix work combinations for the minimum
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+    }
+
+    return table;
 }
 
 /*end base end*/
