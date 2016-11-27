@@ -164,22 +164,33 @@ vector<Combo> getMatrixCombinations(vector<vector<int>> table, int count){
 
 /*base algorithm start*/
 
-vector<vector<int>> solve(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
+vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
     //solve each matrix work combinations for the minimum
     for(int i = 0; i < matrixWorkCombos.size(); i++){
-        int min = lowestComboValue(pList, matrixWorkCombos[i]);
+        int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
 
         cout<<min<<endl;
     }
 
+
+    return table;
 }
 
 
 //solve combo
-int lowestComboValue(vector<int> pList, Combo combo){
-    int min = 0;
+int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y, int priority) {
+    vector<int> minimumList;
 
-    return min;
+    if(priority == 1){
+        int i = x-1;
+        int j = y;
+        int k = x;
+        minimumList.push_back(pieceOne(i,k,table) + pieceTwo(k,j,table));
+    }
+
+
+
+    return 0;
 }
 
 
@@ -219,7 +230,7 @@ int main() {
     vector<int> pList = getPList(matrices);
     vector<Combo> matrixWorkCombos = getMatrixCombinations(table, matrices.size());
 
-    table = solve(table, pList, matrixWorkCombos);
+    table = solveTable(table, pList, matrixWorkCombos);
 
 
     //equation
