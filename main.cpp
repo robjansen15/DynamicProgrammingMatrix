@@ -161,14 +161,13 @@ int pieceThree(int i, int k, int j,vector<int> pList){
 int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y, int priority) {
     vector<int> minimumList;
 
-    cout<<x<<" : "<<y<<endl;
 
-    for(int z = 0; z < priority; z ++){
-        int i = x;
-        int k = i + z;
-        int j = y;
+    if(priority == 1) {
+        int i = x+1;
+        int k = i;
+        int j = y+1;
 
-        cout<<pieceOne(i,k,table)+pieceTwo(k,j,table)+pieceThree(i,k,j,pList);
+        cout << pieceOne(i, k, table) + pieceTwo(k, j, table) + pieceThree(i, k, j, pList)<<endl;
     }
 
 
@@ -181,6 +180,11 @@ vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vec
     for(int i = 0; i < matrixWorkCombos.size(); i++){
 
         int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+    }
+
+    //build priority lists
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+
     }
 
     return table;
