@@ -164,11 +164,22 @@ vector<Combo> getMatrixCombinations(vector<vector<int>> table, int count){
 
 /*base algorithm start*/
 
+vector<vector<int>> solve(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
+    //solve each matrix work combinations for the minimum
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        int min = lowestComboValue(pList, matrixWorkCombos[i]);
+
+        cout<<min<<endl;
+    }
+
+}
+
+
 //solve combo
-int lowestComboValue(Combo combo){
+int lowestComboValue(vector<int> pList, Combo combo){
+    int min = 0;
 
-
-
+    return min;
 }
 
 
@@ -208,6 +219,7 @@ int main() {
     vector<int> pList = getPList(matrices);
     vector<Combo> matrixWorkCombos = getMatrixCombinations(table, matrices.size());
 
+    table = solve(table, pList, matrixWorkCombos);
 
 
     //equation
