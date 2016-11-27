@@ -102,7 +102,7 @@ vector<vector<int>> initializeTable(int count){
 void printTable(vector<vector<int>> table){
     for(int i = 0; i < table.size(); i++){
         for(int j = 0; j < table.size(); j++){
-            cout<<table[i][j]<<"\t\t\t\t";
+            cout<<table[i][j]<<"\t\t\t";
         }
 
         cout<<endl<<endl;
@@ -128,7 +128,7 @@ vector<Combo> getMatrixCombinations(vector<vector<int>> table, int count){
 
 
 
-/*base algorithm start*/
+/*TABLE CREATION ALGORITHM*/
 
 //solve A[i,k]
 int pieceOne(int i, int k, vector<vector<int>> table){
@@ -219,13 +219,10 @@ vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vec
         }
     }
 
-
-    printTable(table);
-
     return table;
 }
 
-/*end base end*/
+/*END TABLE CREATION ALGORITHM*/
 
 
 int main() {
@@ -237,9 +234,9 @@ int main() {
 
     table = solveTable(table, pList, matrixWorkCombos);
 
-
-    //equation
-    // A[i,j] = A[i,k] + A[k+1,j] + P_i-1 * P_k * P_j
+    //print table
+    cout<<"Table:"<<endl;
+    printTable(table);
 
 
 
