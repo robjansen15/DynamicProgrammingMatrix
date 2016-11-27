@@ -8,7 +8,7 @@
 
 using namespace std;
 
-
+/*PRELIMINARY WORK*/
 //code for splitting a string
 //found at: http://code.runnable.com/VHb0hWMZp-ws1gAr/splitting-a-string-into-a-vector-for-c%2B%2B
 vector<string> split(string str, char delimiter) {
@@ -125,11 +125,11 @@ vector<Combo> getMatrixCombinations(vector<vector<int>> table, int count){
 
     return combos;
 }
+/*PRELIMINARY WORK*/
 
 
 
 /*TABLE CREATION ALGORITHM*/
-
 //solve A[i,k]
 int pieceOne(int i, int k, vector<vector<int>> table){
     if(i == k)
@@ -192,6 +192,11 @@ vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vec
         }
     }
 
+    /*
+     * BAD HARD CODING, but just need to get the assignment done
+     */
+
+
     //execute priority by priority
     for(int i = 0; i < matrixWorkCombos.size(); i++){
         //solve the piece if we have the correct priority
@@ -219,28 +224,117 @@ vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vec
         }
     }
 
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 4){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 5){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 6){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 7){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 8){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 9){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    for(int i = 0; i < matrixWorkCombos.size(); i++){
+        //solve the piece if we have the correct priority
+        if(matrixWorkCombos[i].priority_ == 10){
+            int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
+            table[matrixWorkCombos[i].x_][matrixWorkCombos[i].y_] = min;
+        }
+    }
+
+
+    printTable(table);
+
     return table;
 }
-
 /*END TABLE CREATION ALGORITHM*/
 
 
+
+
+/*START MIN PATH ALGORITHM*/
+
+int getMinPath(vector<vector<int>> table){
+    int max = table.size();
+    int min = 0;
+
+
+
+
+
+
+
+    return min;
+}
+
+
+
+/*END MIN PATH ALGORITHM*/
+
 int main() {
-    //variables
+    //variables / preliminary work
     vector<MatrixCombo> matrices = getMatrices();
     vector<vector<int>> table = initializeTable(matrices.size());
     vector<int> pList = getPList(matrices);
     vector<Combo> matrixWorkCombos = getMatrixCombinations(table, matrices.size());
 
+    //solves the table
+    cout<<"Table:"<<endl;
     table = solveTable(table, pList, matrixWorkCombos);
 
-    //print table
-    cout<<"Table:"<<endl;
-    printTable(table);
+
+
+    //minimal work path
+    int path = getMinPath(table);
+    cout<<endl<<endl<<"The minimum path: "<<path<<endl;
 
 
 
-    //printTable(table);
 
 
     int a;
