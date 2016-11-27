@@ -152,9 +152,8 @@ int pieceTwo(int k, int j, vector<vector<int>> table){
 
 
 //solve P_i-1 * P_k * P_j
-int pieceThree(int i, int k, int j, vector<vector<int>> table){
-
-    return 0;
+int pieceThree(int i, int k, int j,vector<int> pList){
+    return pList[i-1] * pList[k] * pList[j];
 }
 
 
@@ -162,13 +161,14 @@ int pieceThree(int i, int k, int j, vector<vector<int>> table){
 int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y, int priority) {
     vector<int> minimumList;
 
-    if(priority == 1){
-        int i = x-1;
-        int j = y;
-        int k = x;
-        //minimumList.push_back(pieceOne(i,k,table) + pieceTwo(k,j,table) + pieceThree(i,k,j,table));
+    cout<<x<<" : "<<y<<endl;
 
-        cout<<pieceOne(i,k,table) + pieceTwo(k,j,table) + pieceThree(i,k,j,table)<<endl;
+    for(int z = 0; z < priority; z ++){
+        int i = x;
+        int k = i + z;
+        int j = y;
+
+        cout<<pieceOne(i,k,table)+pieceTwo(k,j,table)+pieceThree(i,k,j,pList);
     }
 
 
@@ -179,6 +179,7 @@ int lowestComboValue(vector<vector<int>> table, vector<int> pList, int x, int y,
 vector<vector<int>> solveTable(vector<vector<int>> table, vector<int> pList, vector<Combo> matrixWorkCombos){
     //solve each matrix work combinations for the minimum
     for(int i = 0; i < matrixWorkCombos.size(); i++){
+
         int min = lowestComboValue(table, pList, matrixWorkCombos[i].x_, matrixWorkCombos[i].y_, matrixWorkCombos[i].priority_);
     }
 
